@@ -22,15 +22,14 @@ app.get('/', (req, res) => {
   res.render('home');
 })
 
-app.get('/seed/place', async(req, res) => {
-  const place = new Place({
-    title: 'Empire State Building',
-    price: '$999',
-    descriptionn: 'A great building',
-    location: 'New York, NY'
-  });
-  await place.save();
-  res.send(place);
+app.get('/place', async(req, res) => {
+  const places = await Place.find();
+  res.render('places/index', {places});
+});
+app.get('/place/:id', async (req, res) => {
+  // const {id} = req.params;
+  const place = await Place.findById(req.params.id);
+  res.render('places/show', {place});
 })
 
 app.listen(8080, () => {
