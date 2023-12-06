@@ -1,3 +1,4 @@
+const ejsMate = require('ejs-mate');
 const express = require('express');
 const methodOverride = require('method-override');
 const mongoose = require('mongoose');
@@ -15,6 +16,7 @@ mongoose.connect('mongodb://127.0.0.1/bestpoints')
 });
 
 // iniciete ejs
+app.engine('ejs', ejsMate);
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
@@ -57,7 +59,8 @@ app.put('/place/:id', async(req, res) => {
 app.delete('/place/:id', async(req, res) => {
   await Place.findByIdAndDelete(req.params.id);
   res.redirect('/places');
-})
+});
+
 
 app.listen(8080, () => {
   console.log(`server is running on http://127.0.0.1:8080`);

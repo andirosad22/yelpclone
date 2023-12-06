@@ -1,11 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>place | <%= place.title %></title>
-</head>
-<body>
+<% layout('layouts/app')%>
   <h1><%= place.title %></h1>
   <h3><%= place.location %></h3>
   <a href="/places">All Places</a>
@@ -13,5 +6,3 @@
   <form action="/place/<%= place._id%>?_method=DELETE" method="POST">
     <button type="submit">Delete</button>
   </form>
-</body>
-</html>
