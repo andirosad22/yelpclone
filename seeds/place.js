@@ -14,49 +14,57 @@ async function seedPlace(){
       title: 'Taman Mini Indonesia Indah',
       price: 'Rp. 20.000',
       description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam quaerat volupt',
-      location: 'taman mini indonesia indah, jakarta'
+      location: 'taman mini indonesia indah, jakarta',
+      image: 'https://source.unsplash.com/collection/2349781/1280x720'
     },
     {
       title: 'Taman Mini Indonesia Indah',
       price: 'Rp. 20.000',
       description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam quaerat volupt',
-      location: 'taman mini indonesia indah, jakarta'
+      location: 'taman mini indonesia indah, jakarta',
+      image: 'https://source.unsplash.com/collection/2349781/1280x720'
     },
     {
       title: 'Taman Mini Indonesia Indah',
       price: 'Rp. 20.000',
       description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam quaerat volupt',
-      location: 'taman mini indonesia indah, jakarta'
+      location: 'taman mini indonesia indah, jakarta',
+      image: 'https://source.unsplash.com/collection/2349781/1280x720'
     },
     {
       title: 'Taman Mini Indonesia Indah',
       price: 'Rp. 20.000',
       description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam quaerat volupt',
-      location: 'taman mini indonesia indah, jakarta'
+      location: 'taman mini indonesia indah, jakarta',
+      image: 'https://source.unsplash.com/collection/2349781/1280x720'
     },
     {
       title: 'Taman Mini Indonesia Indah',
       price: 'Rp. 20.000',
       description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam quaerat volupt',
-      location: 'taman mini indonesia indah, jakarta'
+      location: 'taman mini indonesia indah, jakarta',
+      image: 'https://source.unsplash.com/collection/2349781/1280x720'
     },
     {
       title: 'Taman Mini Indonesia Indah',
       price: 'Rp. 20.000',
       description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam quaerat volupt',
-      location: 'taman mini indonesia indah, jakarta'
+      location: 'taman mini indonesia indah, jakarta',
+      image: 'https://source.unsplash.com/collection/2349781/1280x720'
     },
     {
       title: 'Taman Mini Indonesia Indah',
       price: 'Rp. 20.000',
       description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam quaerat volupt',
-      location: 'taman mini indonesia indah, jakarta'
+      location: 'taman mini indonesia indah, jakarta',
+      image: 'https://source.unsplash.com/collection/2349781/1280x720'
     },
     {
       title: 'Taman Mini Indonesia Indah',
       price: 'Rp. 20.000',
       description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam quaerat volupt',
-      location: 'taman mini indonesia indah, jakarta'
+      location: 'taman mini indonesia indah, jakarta',
+      image: 'https://source.unsplash.com/collection/2349781/1280x720'
     },
   ];
   try{

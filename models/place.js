@@ -5,7 +5,8 @@ const placeSchema = new Schema({
   title: String,
   price: String,
   descriptionn: String,
-  location: String
+  location: String,
+  image: String,
 });
 
 const Place = mongoose.model('Place', placeSchema);
