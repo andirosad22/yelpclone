@@ -10,5 +10,8 @@
   <h3><%= place.location %></h3>
   <a href="/places">All Places</a>
   <a href="/place/<%= place._id %>/edit">Edit</a>
+  <form action="/place/<%= place._id%>?_method=DELETE" method="POST">
+    <button type="submit">Delete</button>
+  </form>
 </body>
 </html>

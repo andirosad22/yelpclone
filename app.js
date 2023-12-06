@@ -52,6 +52,11 @@ app.get('/place/:id/edit', async(req, res) =>{
 app.put('/place/:id', async(req, res) => {
   await Place.findByIdAndUpdate(req.params.id, {...req.body.place});
   res.redirect('/places');
+});
+
+app.delete('/place/:id', async(req, res) => {
+  await Place.findByIdAndDelete(req.params.id);
+  res.redirect('/places');
 })
 
 app.listen(8080, () => {
