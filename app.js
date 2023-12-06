@@ -1,4 +1,5 @@
 const express = require('express');
+const methodOverride = require('method-override');
 const mongoose = require('mongoose');
 const path = require('path');
 const app = express();
@@ -19,6 +20,7 @@ app.set('views', path.join(__dirname, 'views'));
 
 // middleware
 app.use(express.urlencoded({ extended: true }));
+app.use(methodOverride('_method'));
 
 
 app.get('/', (req, res) => {
@@ -42,6 +44,15 @@ app.get('/place/:id', async (req, res) => {
   const place = await Place.findById(req.params.id);
   res.render('places/show', {place});
 });
+app.get('/place/:id/edit', async(req, res) =>{
+  const place = await Place.findById(req.params.id);
+  res.render('places/edit', {place});
+});
+
+app.put('/place/:id', async(req, res) => {
+  await Place.findByIdAndUpdate(req.params.id, {...req.body.place});
+  res.redirect('/places');
+})
 
 app.listen(8080, () => {
   console.log(`server is running on http://127.0.0.1:8080`);
