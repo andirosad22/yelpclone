@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const placeSchema = new Schema({
   title: String,
   price: String,
-  descriptionn: String,
+  description: String,
   location: String,
   image: String,
 });
