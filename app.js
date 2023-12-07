@@ -37,10 +37,14 @@ app.get('/places', async(req, res) => {
 app.get('/place/create', (req, res) => {
   res.render('places/create');
 });
-app.post('/places', async(req, res) => {
-  const place = new Place(req.body.place);
-  await place.save();
-  res.redirect('/places');
+app.post('/places', async(req, res, next) => {
+  try {
+    const place = new Place(req.body.place);
+    await place.save();
+    res.redirect('/places');
+  } catch (error) {
+    next(error);
+  }
 })
 app.get('/place/:id', async (req, res) => {  
   const place = await Place.findById(req.params.id);
@@ -61,6 +65,10 @@ app.delete('/place/:id', async(req, res) => {
   res.redirect('/places');
 });
 
+// error handler
+app.use((err, req, res, next) => {
+  res.status(500).send('Something broken!');
+})
 
 app.listen(8080, () => {
   console.log(`server is running on http://127.0.0.1:8080`);
