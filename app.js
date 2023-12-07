@@ -1,7 +1,9 @@
 const ejsMate = require('ejs-mate');
 const express = require('express');
+const ErrorHandle = require('./utils/ErrorHandle');
 const methodOverride = require('method-override');
 const mongoose = require('mongoose');
+const wrapAsync = require('./utils/wrapAsync');
 const path = require('path');
 const app = express();
 
@@ -29,45 +31,47 @@ app.get('/', (req, res) => {
   res.render('home');
 })
 
-app.get('/places', async(req, res) => {
+app.get('/places', wrapAsync(async(req, res) => {
   const places = await Place.find();
   res.render('places/index', {places});
-});
+}));
 
 app.get('/place/create', (req, res) => {
   res.render('places/create');
 });
-app.post('/places', async(req, res, next) => {
-  try {
+app.post('/places', wrapAsync(async(req, res, next) => {
     const place = new Place(req.body.place);
     await place.save();
     res.redirect('/places');
-  } catch (error) {
-    next(error);
-  }
-})
-app.get('/place/:id', async (req, res) => {  
+}));
+app.get('/place/:id', wrapAsync(async (req, res) => {  
   const place = await Place.findById(req.params.id);
   res.render('places/show', {place});
-});
-app.get('/place/:id/edit', async(req, res) =>{
+}));
+app.get('/place/:id/edit', wrapAsync(async(req, res) =>{
   const place = await Place.findById(req.params.id);
   res.render('places/edit', {place});
-});
+}));
 
-app.put('/place/:id', async(req, res) => {
+app.put('/place/:id', wrapAsync(async(req, res) => {
   await Place.findByIdAndUpdate(req.params.id, {...req.body.place});
   res.redirect('/places');
-});
+}));
 
-app.delete('/place/:id', async(req, res) => {
+app.delete('/place/:id', wrapAsync(async(req, res) => {
   await Place.findByIdAndDelete(req.params.id);
   res.redirect('/places');
-});
+}));
+
+app.all('*', (req, res, next) => {
+  next(new ErrorHandle('Page Note Found', 404));
+})
 
 // error handler
 app.use((err, req, res, next) => {
-  res.status(500).send('Something broken!');
+  const {statusCode = 500} = err;
+  if(!err.message) err.message = 'Oh no, Something Went Wrong';
+  res.status(statusCode).render('error', {err});
 })
 
 app.listen(8080, () => {
