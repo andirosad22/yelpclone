@@ -1,6 +1,6 @@
 <% layout('layouts/app')%>
 
-  <div class="row">
+  <div class="row mb-5">
     <div class="col-6 offset-3">
       <div class="card">
         <img src="<%= place.image %>" alt="<%= place.title %>" class="card-img-top">
@@ -13,7 +13,7 @@
           <li class="list-group-item"><%= place.price %></li>
         </ul>
         <div class="card-body d-flex gap-3">
-          <a href="/place/<%= place._id %>/edit" class="btn btn-warning text-white">Edit</a>
+          <a href="/place/<%= place._id %>/edit" class="btn btn-warning text-white card-link">Edit</a>
           <form action="/place/<%= place._id%>?_method=DELETE" method="POST">
             <button type="submit" class="btn btn-danger text-white">Delete</button>
           </form>
