@@ -1,6 +1,7 @@
 const ejsMate = require('ejs-mate');
 const express = require('express');
 const ErrorHandle = require('./utils/ErrorHandle');
+const Joi = require('joi');
 const methodOverride = require('method-override');
 const mongoose = require('mongoose');
 const wrapAsync = require('./utils/wrapAsync');
@@ -9,6 +10,10 @@ const app = express();
 
 // Models
 const Place = require('./models/place');
+const { log } = require('console');
+
+// schema
+const { placeSchema } = require('./schemas/place');
 
 mongoose.connect('mongodb://127.0.0.1/bestpoints')
 .then((result)=>{
@@ -26,6 +31,17 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 
+const validatePlace = (req, res, next) => {
+  const {error} = placeSchema.validate(req.body);
+  if(error) {
+    console.log(error);
+    const msg = error.details.map(el => el.message).join(',');
+    return next(new ErrorHandle(msg, 400));
+  }else{
+    next();
+  }
+}
+
 
 app.get('/', (req, res) => {
   res.render('home');
@@ -39,10 +55,11 @@ app.get('/places', wrapAsync(async(req, res) => {
 app.get('/place/create', (req, res) => {
   res.render('places/create');
 });
-app.post('/places', wrapAsync(async(req, res, next) => {
-    const place = new Place(req.body.place);
-    await place.save();
-    res.redirect('/places');
+
+app.post('/places', validatePlace, wrapAsync(async(req, res, next) => {
+  const place = new Place(req.body.place);
+  await place.save();
+  res.redirect('/places');
 }));
 app.get('/place/:id', wrapAsync(async (req, res) => {  
   const place = await Place.findById(req.params.id);
@@ -53,7 +70,8 @@ app.get('/place/:id/edit', wrapAsync(async(req, res) =>{
   res.render('places/edit', {place});
 }));
 
-app.put('/place/:id', wrapAsync(async(req, res) => {
+
+app.put('/place/:id', validatePlace, wrapAsync(async(req, res) => {
   await Place.findByIdAndUpdate(req.params.id, {...req.body.place});
   res.redirect('/places');
 }));
@@ -72,8 +90,8 @@ app.use((err, req, res, next) => {
   const {statusCode = 500} = err;
   if(!err.message) err.message = 'Oh no, Something Went Wrong';
   res.status(statusCode).render('error', {err});
-})
+});
 
 app.listen(8080, () => {
-  console.log(`server is running on http://127.0.0.1:8080`);
+  console.log(`server is running on http://127.0.0.1:8080`)
 })
