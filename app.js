@@ -10,6 +10,7 @@ const app = express();
 
 // Models
 const Place = require('./models/place');
+const Review = require('./models/review');
 const { log } = require('console');
 
 // schema
@@ -81,9 +82,18 @@ app.delete('/place/:id', wrapAsync(async(req, res) => {
   res.redirect('/places');
 }));
 
+app.post('/place/:id/review', wrapAsync(async(req, res) => {
+  const review = new Review(req.body.review);
+  const place = await Place.findById(req.params.id);
+  place.reviews.push(review);
+  await review.save();
+  await place.save();
+  res.redirect(`/place/${req.params.id}`);
+}));
+
 app.all('*', (req, res, next) => {
   next(new ErrorHandle('Page Note Found', 404));
-})
+});
 
 // error handler
 app.use((err, req, res, next) => {
