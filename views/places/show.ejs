@@ -1,7 +1,7 @@
 <% layout('layouts/app')%>
 
   <div class="row mb-5">
-    <div class="col-6 offset-3">
+    <div class="col-6">
       <div class="card">
         <img src="<%= place.image %>" alt="<%= place.title %>" class="card-img-top">
         <div class="card-body">
@@ -22,6 +22,20 @@
           <a href="/places" class="btn btn-primary"> &leftarrow; Back</a>
         </div>
       </div>
+    </div>
+    <div class="col-6">
+      <h3>Leave a rebiew</h3>
+      <form action="">
+        <div class="mb-3">
+          <label for="rating">Rating</label>
+          <input type="range" name="place[rating]" id="rating" min="1" max="5" class="form-range">
+        </div>
+        <div class="mb-3">
+          <label for="review">Review</label>
+          <textarea name="review[body]" id="review" cols="30" rows="5" class="form-control"></textarea>
+        </div>
+        <button type="submit" class="btn btn-success">Simpan</button>
+      </form>
     </div>
   </div>
   
