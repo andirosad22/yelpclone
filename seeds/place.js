@@ -12,59 +12,59 @@ async function seedPlace(){
   const places = [
     {
       title: 'Taman Mini Indonesia Indah',
-      price: 'Rp. 20.000',
+      price: 20000,
       description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam quaerat volupt',
       location: 'taman mini indonesia indah, jakarta',
-      image: 'https://source.unsplash.com/collection/2349781/1280x720'
+      image: 'https://images.unsplash.com/photo-1657214667486-8fbe5af3e034?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
     },
     {
       title: 'Taman Mini Indonesia Indah',
-      price: 'Rp. 20.000',
+      price: 20000,
       description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam quaerat volupt',
       location: 'taman mini indonesia indah, jakarta',
-      image: 'https://source.unsplash.com/collection/2349781/1280x720'
+      image: 'https://images.unsplash.com/photo-1657214667486-8fbe5af3e034?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
     },
     {
       title: 'Taman Mini Indonesia Indah',
-      price: 'Rp. 20.000',
+      price: 20000,
       description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam quaerat volupt',
       location: 'taman mini indonesia indah, jakarta',
-      image: 'https://source.unsplash.com/collection/2349781/1280x720'
+      image: 'https://images.unsplash.com/photo-1657214667486-8fbe5af3e034?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
     },
     {
       title: 'Taman Mini Indonesia Indah',
-      price: 'Rp. 20.000',
+      price: 20000,
       description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam quaerat volupt',
       location: 'taman mini indonesia indah, jakarta',
-      image: 'https://source.unsplash.com/collection/2349781/1280x720'
+      image: 'https://images.unsplash.com/photo-1657214667486-8fbe5af3e034?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
     },
     {
       title: 'Taman Mini Indonesia Indah',
-      price: 'Rp. 20.000',
+      price: 20000,
       description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam quaerat volupt',
       location: 'taman mini indonesia indah, jakarta',
-      image: 'https://source.unsplash.com/collection/2349781/1280x720'
+      image: 'https://images.unsplash.com/photo-1657214667486-8fbe5af3e034?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
     },
     {
       title: 'Taman Mini Indonesia Indah',
-      price: 'Rp. 20.000',
+      price: 20000,
       description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam quaerat volupt',
       location: 'taman mini indonesia indah, jakarta',
-      image: 'https://source.unsplash.com/collection/2349781/1280x720'
+      image: 'https://images.unsplash.com/photo-1657214667486-8fbe5af3e034?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
     },
     {
       title: 'Taman Mini Indonesia Indah',
-      price: 'Rp. 20.000',
+      price: 20000,
       description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam quaerat volupt',
       location: 'taman mini indonesia indah, jakarta',
-      image: 'https://source.unsplash.com/collection/2349781/1280x720'
+      image: 'https://images.unsplash.com/photo-1657214667486-8fbe5af3e034?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
     },
     {
       title: 'Taman Mini Indonesia Indah',
-      price: 'Rp. 20.000',
+      price: 20000,
       description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam quaerat volupt',
       location: 'taman mini indonesia indah, jakarta',
-      image: 'https://source.unsplash.com/collection/2349781/1280x720'
+      image: 'https://images.unsplash.com/photo-1657214667486-8fbe5af3e034?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
     },
   ];
   try{

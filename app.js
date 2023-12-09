@@ -15,6 +15,7 @@ const { log } = require('console');
 
 // schema
 const { placeSchema } = require('./schemas/place');
+const { reviewSchema } = require('./schemas/review');
 
 mongoose.connect('mongodb://127.0.0.1/bestpoints')
 .then((result)=>{
@@ -32,6 +33,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 
+
 const validatePlace = (req, res, next) => {
   const {error} = placeSchema.validate(req.body);
   if(error) {
@@ -40,8 +42,19 @@ const validatePlace = (req, res, next) => {
     return next(new ErrorHandle(msg, 400));
   }else{
     next();
-  }
-}
+  };
+};
+const validateReview = (req, res, next) => {
+  const {error} = reviewSchema.validate(req.body);
+  if(error) {
+    const msg = error.details.map(el => el.message).join(',');
+    return next(new ErrorHandle(msg, 400));
+  }else{
+    next();
+  };
+};  
+       
+
 
 
 app.get('/', (req, res) => {
@@ -82,12 +95,12 @@ app.delete('/place/:id', wrapAsync(async(req, res) => {
   res.redirect('/places');
 }));
 
-app.post('/place/:id/review', wrapAsync(async(req, res) => {
+app.post('/place/:id/review', validateReview, wrapAsync(async(req, res) => {
   const review = new Review(req.body.review);
   const place = await Place.findById(req.params.id);
   place.reviews.push(review);
   await review.save();
-  await place.save();
+  await place.save(); 
   res.redirect(`/place/${req.params.id}`);
 }));
 
