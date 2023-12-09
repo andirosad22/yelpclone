@@ -24,7 +24,7 @@
       </div>
     </div>
     <div class="col-6">
-      <h3>Leave a review</h3>
+      <h3>Review place here</h3>  
       <form action="/place/<%= place._id %>/review" method="POST" class="validated-form" novalidate>
         <div class="mb-3">
           <label for="rating">Rating</label>
@@ -48,6 +48,14 @@
         </div>
         <button type="submit" class="btn btn-success">Simpan</button>
       </form>
+      <% for(const review of place.reviews){ %>
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Rating: <%= review.rating %></h5>
+            <p class="card-text"><%= review.body %></p>
+          </div>
+        </div>
+        <% } %>
     </div>
   </div>
   
