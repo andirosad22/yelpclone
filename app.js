@@ -104,6 +104,21 @@ app.post('/place/:id/review', validateReview, wrapAsync(async(req, res) => {
   res.redirect(`/place/${req.params.id}`);
 }));
 
+app.delete('/places/:place_id/reviews/:review_id', wrapAsync(async(req, res) => {
+  const {place_id, review_id} = req.params;
+  await Place.findByIdAndUpdate(req.params.place_id, {$pull: {reviews: {_id: req.params.review_id}}});
+  await Review.findByIdAndDelete(review_id)
+  res.redirect(`/place/${place_id}`);
+  
+}));
+
+app.delete('/places/:place_id/reviews/:review_id', wrapAsync(async (req, res) => {
+  const {place_id, review_id} = req.params;
+  await Place.findByIdAndUpdate(place_id, {$pull: {reviews: {_id: review_id}}});
+  await Review.findByIdAndDelete(review_id);
+  res.redirect(`/places/${place_id}`);
+}));
+
 app.all('*', (req, res, next) => {
   next(new ErrorHandle('Page Note Found', 404));
 });
