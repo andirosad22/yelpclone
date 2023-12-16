@@ -2,7 +2,7 @@
 
   <h1 class="text-center">Edit Place</h1>
   <div class="col-6 offset-3 ">
-    <form action="/place/<%= place._id %>?_method=PUT" method="POST" class="validated-form" novalidate>
+    <form action="/places/<%= place._id %>?_method=PUT" method="POST" class="validated-form" novalidate>
       <div class="mb-2">
         <label for="title" class="form-lable">Title</label>
         <input type="text" name="place[title]" id="title" class="form-control" value="<%= place.title %>" required>

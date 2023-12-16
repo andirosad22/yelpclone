@@ -1,6 +1,6 @@
 <% layout('layouts/app')%>
   <h1>All Places</h1>
-  <a href="/place/create">Creat new place</a>
+  <a href="/places/create">Creat new place</a>
   <ul>
     <% for(const place of places){ %>
       <div class="card mb-3">
@@ -15,7 +15,7 @@
               <p class="card-text">
                 <small class="text-secondary"><%= place.location %></small>
               </p>
-              <a href="/place/<%= place._id %>" class="btn btn-primary">view <%= place.title %></a>
+              <a href="/places/<%= place._id %>" class="btn btn-primary">view <%= place.title %></a>
             </div>
           </div>
         </div>
