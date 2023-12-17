@@ -1,5 +1,6 @@
 const ejsMate = require('ejs-mate');
 const express = require('express');
+const flash = require('connect-flash');
 const session = require('express-session');
 const ErrorHandle = require('./utils/ErrorHandle');
 const Joi = require('joi');
@@ -42,7 +43,14 @@ app.use(session({
     expire: Date.now() + 1000 * 60 * 60 * 24 * 7,
     maxAge: 1000 * 60 * 60 * 24 * 7,
   }
-}))
+}));
+app.use(flash());
+
+app.use((req, res, next) => {
+  res.locals.success_msg = req.flash('success_msg');
+  res.locals.error_msg = req.flash('error_msg');
+  next();
+});
 
 
 

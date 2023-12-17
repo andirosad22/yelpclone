@@ -2,6 +2,7 @@
 const express = require('express');
 const wrapAsync = require('../utils/wrapAsync');
 const ErrorHandle = require('../utils/ErrorHandle');
+const isValidObjectId = require('../middlewares/isValidObjectId');
 // Models
 const Place = require('../models/place');
 
@@ -33,9 +34,10 @@ router.get('/create', (req, res) => {
 router.post('/', validatePlace, wrapAsync(async(req, res, next) => {
   const place = new Place(req.body.place);
   await place.save();
+  req.flash('success_msg', 'Place Added successfully');
   res.redirect('/places');
 }));
-router.get('/:id', wrapAsync(async (req, res) => {  
+router.get('/:id', isValidObjectId('/places'), wrapAsync(async (req, res) => {  
   const place = await Place.findById(req.params.id).populate('reviews');
   res.render('places/show', {place});
 }));
@@ -45,13 +47,15 @@ router.get('/:id/edit', wrapAsync(async(req, res) =>{
 }));
 
   
-router.put('/:id', validatePlace, wrapAsync(async(req, res) => {
+router.put('/:id', isValidObjectId('/places'), validatePlace, wrapAsync(async(req, res) => {
   await Place.findByIdAndUpdate(req.params.id, {...req.body.place});
+  req.flash('success_msg', 'Place updated successfully');
   res.redirect('/places');
 }));
 
 router.delete('/:id', wrapAsync(async(req, res) => {
   await Place.findByIdAndDelete(req.params.id);
+  req.flash('success_msg', 'Place deleted successfully');
   res.redirect('/places');
 }));
 
