@@ -40,7 +40,14 @@ router.post('/',isAuthenticated, validatePlace, wrapAsync(async(req, res, next) 
   res.redirect('/places');
 }));
 router.get('/:id', isValidObjectId('/places'), wrapAsync(async (req, res) => {  
-  const place = await Place.findById(req.params.id).populate('reviews').populate('author');
+  const place = await Place.findById(req.params.id)
+  .populate({
+    path: 'reviews',
+    populate: {
+      path: 'author'
+    }
+  })
+  .populate('author');
   res.render('places/show', {place});
 }));
 router.get('/:id/edit',isAuthorPlace, isAuthenticated, wrapAsync(async(req, res) =>{
