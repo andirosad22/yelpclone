@@ -23,7 +23,7 @@ const validatePlace = (req, res, next) => {
   };
 };
 
-router.get('/', isAuthenticated, wrapAsync(async(req, res) => {
+router.get('/', wrapAsync(async(req, res) => {
   const places = await Place.find();
   res.render('places/index', {places});
 }));
@@ -38,7 +38,7 @@ router.post('/',isAuthenticated, validatePlace, wrapAsync(async(req, res, next) 
   req.flash('success_msg', 'Place Added successfully');
   res.redirect('/places');
 }));
-router.get('/:id',isAuthenticated, isValidObjectId('/places'), wrapAsync(async (req, res) => {  
+router.get('/:id', isValidObjectId('/places'), wrapAsync(async (req, res) => {  
   const place = await Place.findById(req.params.id).populate('reviews').populate('author');
   res.render('places/show', {place});
 }));
