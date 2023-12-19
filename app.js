@@ -70,10 +70,6 @@ app.use('/', require('./routes/auth'));
 app.use('/places', require('./routes/places'));
 app.use('/places/:place_id/reviews', require('./routes/reviews'));
 
-
-
-
-
 app.all('*', (req, res, next) => {
   next(new ErrorHandle('Page Note Found', 404));
 });
