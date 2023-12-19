@@ -24,13 +24,18 @@ const validateReview = (req, res, next) => {
 };  
 
 router.post('/', isValidObjectId('/places'),  validateReview, wrapAsync(async(req, res) => {
+  const {place_id} = req.params;
   const review = new Review(req.body.review);
-  const place = await Place.findById(req.params.place_id);
+  const place = await Place.findById(place_id);
+  review.author = req.user._id;
+
   place.reviews.push(review);
+
   await review.save();
   await place.save(); 
+
   req.flash('success_msg', 'Review Added successfully');
-  res.redirect(`/places/${req.params.place_id}`);
+  res.redirect(`/places/${place_id}`);
 }));
 
 router.delete('/:review_id', isAuthenticated, isValidObjectId('/places'), wrapAsync(async(req, res) => {
@@ -39,7 +44,6 @@ router.delete('/:review_id', isAuthenticated, isValidObjectId('/places'), wrapAs
   await Review.findByIdAndDelete(review_id)
   req.flash('success_msg', 'Place deleted successfully');
   res.redirect(`/places/${place_id}`);
-  
 }));
 
 router.delete('/:review_id',isAuthenticated, isValidObjectId('/places'), wrapAsync(async (req, res) => {

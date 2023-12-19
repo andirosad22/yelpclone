@@ -49,7 +49,7 @@ router.get('/:id/edit',isAuthorPlace, isAuthenticated, wrapAsync(async(req, res)
 }));
 
   
-router.put('/:id',isAuthorPlace, isAuthenticated, isValidObjectId('/places'), validatePlace, wrapAsync(async(req, res) => {
+router.put('/:id', isAuthenticated,isAuthorPlace, isValidObjectId('/places'), validatePlace, wrapAsync(async(req, res) => {
   await Place.findByIdAndUpdate(req.params.id, {...req.body.place});
   req.flash('success_msg', 'Place updated successfully');
   res.redirect(`/places${id}`);
