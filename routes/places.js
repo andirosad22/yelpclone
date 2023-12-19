@@ -9,6 +9,7 @@ const Place = require('../models/place');
 
 // Schema
 const { placeSchema } = require('../schemas/place');
+const { isAuthorPlace } = require('../middlewares/isAuthor');
 
 const router = express.Router();
 // middleware
@@ -42,26 +43,19 @@ router.get('/:id', isValidObjectId('/places'), wrapAsync(async (req, res) => {
   const place = await Place.findById(req.params.id).populate('reviews').populate('author');
   res.render('places/show', {place});
 }));
-router.get('/:id/edit',isAuthenticated, wrapAsync(async(req, res) =>{
+router.get('/:id/edit',isAuthorPlace, isAuthenticated, wrapAsync(async(req, res) =>{
   const place = await Place.findById(req.params.id);
   res.render('places/edit', {place});
 }));
 
   
-router.put('/:id',isAuthenticated, isValidObjectId('/places'), validatePlace, wrapAsync(async(req, res) => {
-  const {id} = req.params;
-  let place = await Place.findById(id);
-
-  if(!place.author.equals(req.user._id)){
-    req.flash('error_msg', 'Not Authorized');
-    return res.redirect('/places');
-  }
+router.put('/:id',isAuthorPlace, isAuthenticated, isValidObjectId('/places'), validatePlace, wrapAsync(async(req, res) => {
   await Place.findByIdAndUpdate(req.params.id, {...req.body.place});
   req.flash('success_msg', 'Place updated successfully');
   res.redirect(`/places${id}`);
 }));
 
-router.delete('/:id',isAuthenticated, wrapAsync(async(req, res) => {
+router.delete('/:id',isAuthorPlace, isAuthenticated, wrapAsync(async(req, res) => {
   await Place.findByIdAndDelete(req.params.id);
   req.flash('success_msg', 'Place deleted successfully');
   res.redirect('/places');
