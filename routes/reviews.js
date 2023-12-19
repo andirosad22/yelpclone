@@ -3,6 +3,7 @@ const Place = require('../models/place');
 const isValidObjectId = require('../middlewares/isValidObjectId');
 const wrapAsync = require('../utils/wrapAsync');
 const ErrorHandle = require('../utils/ErrorHandle');
+const isAuthenticated = require('../middlewares/isAuth');
 
 
 const router = express.Router({mergeParams: true});
@@ -32,7 +33,7 @@ router.post('/', isValidObjectId('/places'),  validateReview, wrapAsync(async(re
   res.redirect(`/places/${req.params.place_id}`);
 }));
 
-router.delete('/:review_id', isValidObjectId('/places'), wrapAsync(async(req, res) => {
+router.delete('/:review_id', isAuthenticated, isValidObjectId('/places'), wrapAsync(async(req, res) => {
   const {place_id, review_id} = req.params;
   await Place.findByIdAndUpdate(req.params.place_id, {$pull: {reviews: {_id: req.params.review_id}}});
   await Review.findByIdAndDelete(review_id)
@@ -41,7 +42,7 @@ router.delete('/:review_id', isValidObjectId('/places'), wrapAsync(async(req, re
   
 }));
 
-router.delete('/:review_id',isValidObjectId('/places'), wrapAsync(async (req, res) => {
+router.delete('/:review_id',isAuthenticated, isValidObjectId('/places'), wrapAsync(async (req, res) => {
   const {place_id, review_id} = req.params;
   await Place.findByIdAndUpdate(place_id, {$pull: {reviews: {_id: review_id}}});
   await Review.findByIdAndDelete(review_id);
