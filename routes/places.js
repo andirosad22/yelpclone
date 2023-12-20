@@ -25,23 +25,19 @@ const validatePlace = (req, res, next) => {
   };
 };
 
-router.get('/', wrapAsync(PlaceController.index));
+router.route('/')
+    .get(wrapAsync(PlaceController.index))
+    .post(isAuthenticated, validatePlace, wrapAsync(PlaceController.store));
 
-router.get('/create', isAuthenticated, (req, res) => {
-  res.render('places/create');
-});
+router.get('/create', isAuthenticated, PlaceController.create);
 
-router.post('/',isAuthenticated, validatePlace, wrapAsync(PlaceController.store));
-router.get('/:id', isValidObjectId('/places'), wrapAsync(PlaceController.show));
+router.route('/:id')
+    .get(isValidObjectId('/places'), wrapAsync(PlaceController.show))
+    .put(isAuthenticated,isAuthorPlace, isValidObjectId('/places'), validatePlace, wrapAsync(PlaceController.update))
+    .delete(isAuthorPlace, isAuthenticated, wrapAsync(PlaceController.destroy));
+
+
+
 router.get('/:id/edit',isAuthorPlace, isAuthenticated, wrapAsync(PlaceController.edit));
-
-  
-router.put('/:id', isAuthenticated,isAuthorPlace, isValidObjectId('/places'), validatePlace, wrapAsync(PlaceController.update));
-
-router.delete('/:id',isAuthorPlace, isAuthenticated, wrapAsync(async(req, res) => {
-  await Place.findByIdAndDelete(req.params.id);
-  req.flash('success_msg', 'Place deleted successfully');
-  res.redirect('/places');
-}));
 
 module.exports= router;

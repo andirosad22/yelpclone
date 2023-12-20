@@ -3,6 +3,9 @@ module.exports.index = async(req, res) => {
   const places = await Place.find();
   res.render('places/index', {places});
 }
+module.exports.create = (req, res) => {
+  res.render('places/create');
+};
 
 module.exports.store = async(req, res, next) => {
   const place = new Place(req.body.place);
