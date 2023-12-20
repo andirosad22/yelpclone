@@ -28,12 +28,7 @@ const validatePlace = (req, res, next) => {
 
 router.route('/')
     .get(wrapAsync(PlaceController.index))
-    // .post(isAuthenticated, validatePlace, wrapAsync(PlaceController.store));
-    .post(isAuthenticated, upload.array('image', 5), (req, res)=>{
-      console.log(req.files);
-      console.log(req.body);
-      res.send('it works');
-    })
+    .post(isAuthenticated,upload.array('image', 5), validatePlace, wrapAsync(PlaceController.store));
 
 router.get('/create', isAuthenticated, PlaceController.create);
 
