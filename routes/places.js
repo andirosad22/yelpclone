@@ -4,6 +4,7 @@ const wrapAsync = require('../utils/wrapAsync');
 const ErrorHandle = require('../utils/ErrorHandle');
 const isValidObjectId = require('../middlewares/isValidObjectId');
 const isAuthenticated = require('../middlewares/isAuth')
+const upload = require('../config/multer');
 // Models
 const Place = require('../models/place');
 const PlaceController = require('../controller/places');
@@ -27,7 +28,12 @@ const validatePlace = (req, res, next) => {
 
 router.route('/')
     .get(wrapAsync(PlaceController.index))
-    .post(isAuthenticated, validatePlace, wrapAsync(PlaceController.store));
+    // .post(isAuthenticated, validatePlace, wrapAsync(PlaceController.store));
+    .post(isAuthenticated, upload.array('image', 5), (req, res)=>{
+      console.log(req.files);
+      console.log(req.body);
+      res.send('it works');
+    })
 
 router.get('/create', isAuthenticated, PlaceController.create);
 
