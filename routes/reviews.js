@@ -29,11 +29,4 @@ router.post('/', isValidObjectId('/places'), isAuthenticated,  validateReview, w
 
 router.delete('/:review_id', isAuthenticated, isAuthorReview, isValidObjectId('/places'), wrapAsync(ReviewController.destroy));
 
-// router.delete('/:review_id',isAuthenticated, isValidObjectId('/places'), wrapAsync(async (req, res) => {
-//   const {place_id, review_id} = req.params;
-//   await Place.findByIdAndUpdate(place_id, {$pull: {reviews: {_id: review_id}}});
-//   await Review.findByIdAndDelete(review_id);
-//   res.redirect(`/places/${place_id}`);
-// }));
-
 module.exports = router;
