@@ -1,7 +1,7 @@
 
 const express = require('express');
 const wrapAsync = require('../utils/wrapAsync');
-const ErrorHandle = require('../utils/ErrorHandle');
+const ExpressError = require('../utils/ErrorHandle');
 const isValidObjectId = require('../middlewares/isValidObjectId');
 const isAuthenticated = require('../middlewares/isAuth')
 const upload = require('../config/multer');
@@ -20,7 +20,7 @@ const validatePlace = (req, res, next) => {
   if(error) {
     console.log(error);
     const msg = error.details.map(el => el.message).join(',');
-    return next(new ErrorHandle(msg, 400));
+    return next(new ExpressError(msg, 400));
   }else{
     next();
   };
@@ -34,7 +34,7 @@ router.get('/create', isAuthenticated, PlaceController.create);
 
 router.route('/:id')
     .get(isValidObjectId('/places'), wrapAsync(PlaceController.show))
-    .put(isAuthenticated,isAuthorPlace, isValidObjectId('/places'), validatePlace, wrapAsync(PlaceController.update))
+    .put(isAuthenticated,upload.array('image', 5), isAuthorPlace, isValidObjectId('/places'), validatePlace, wrapAsync(PlaceController.update))
     .delete(isAuthorPlace, isAuthenticated, wrapAsync(PlaceController.destroy));
 
 
