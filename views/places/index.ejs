@@ -6,9 +6,7 @@
       <div class="card mb-3">
         <div class="row">
           <div class="col-md-4">
-            <% place.images.forEach((image, index) => {%>
-            <img src="/images/<%= image.filename %>" alt="image <%= place.title %> " class="img-fluid">
-            <%}) %>
+            <img src="/images/<%= place.images[0].filename %>" alt="image <%= place.title %> " class="img-fluid">
           </div>
           <div class="col-md-8">
             <div class="card-body">
