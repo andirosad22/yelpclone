@@ -8,6 +8,17 @@ const placeSchema = new Schema({
   price: Number,
   description: String,
   location: String,
+  geometry:{
+    type: {
+      type: String,
+      enum: ['Point'],
+      require: true
+    },
+    coordinates: {
+      type: [Number],
+      required: true
+    }
+  },
   images: [
     {
       url: String,
